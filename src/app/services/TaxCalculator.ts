@@ -1,6 +1,7 @@
-import { OreDetail, MoonOreNames, MoonMaterialNames, MoonMaterialLowercaseNames } from '../data/ore';
+import { OreDetail, MoonOreNames, MoonMaterialNames, MoonMaterialLowercaseNames } from '../models/ore';
 import { Injectable } from '@angular/core';
 import { MarketService } from './MarketService';
+import { MarketHistory } from '../models/MarketHistory';
 
 export interface LedgerRow {
     pilot: string;
@@ -22,28 +23,34 @@ export class TaxCalculator {
     public refineRate;
     public allianceTax;
     public corporationTax;
+    public selectedDate;
 
     constructor(private market: MarketService) { }
 
-    public setRates(refineRate: number, allianceTax: number, corporationTax: number) {
+    public setRates(refineRate: number, allianceTax: number, corporationTax: number, selectedDate: string) {
         this.refineRate = refineRate;
         this.allianceTax = allianceTax;
         this.corporationTax = corporationTax;
+        this.selectedDate = selectedDate;
     }
 
     public calculateTax(row: LedgerRow) {
-        //console.log(JSON.stringify(this.market.moonOrePrices));
+        // console.log(JSON.stringify(this.market.moonOrePrices));
 
         if (!this.refineRate || !this.allianceTax || !this.corporationTax) {
             throw Error('Rates not set!');
         }
 
+        if (!this.selectedDate) {
+            throw Error('Market Date not set!');
+        }
+
         const oreId = +row.typeId;
         const details = this.getOreDetails(oreId);
-        //console.log(details);
-        //console.log(row.quantity);
+        // console.log(details);
+        // console.log(row.quantity);
         const materials = this.getRefinedQuantity(oreId, row.quantity, details);
-        //console.log(materials);
+        // console.log(materials);
         let materialPrices = this.getPrices(materials);
         materialPrices = this.addTaxes(materialPrices);
 
@@ -67,7 +74,12 @@ export class TaxCalculator {
         for (const property in materials) {
             if (materials.hasOwnProperty(property)) {
                 const id = this.getKeyByValue(MoonMaterialLowercaseNames, property);
-                const value = materials[property] * this.market.moonOrePrices[id];
+
+                const price: MarketHistory[] = this.market.moonOrePrices[id].filter((priceData: MarketHistory) => {
+                    return priceData.date === this.selectedDate;
+                });
+
+                const value = materials[property] * price[0].highest;
 
                 materialsWithPrices.materials.push({
                     name: property,

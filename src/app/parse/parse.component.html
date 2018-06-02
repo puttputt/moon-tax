@@ -27,9 +27,18 @@
           <input [(ngModel)]="corpTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         </div>
 
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Market Date</span>
+          </div>
+          <select [(ngModel)]="selectedDate" class="form-control" id="exampleFormControlSelect1">
+            <option *ngFor="let marketHistory of marketResponse" [value]="marketHistory?.date">{{marketHistory?.date}}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
-    <button type="submit" (click)="parse()" class="btn btn-primary mb-2">TAX</button>
+    <button type="submit" (click)="parse()" [disabled]="!hasMarketData" class="btn btn-primary mb-2">TAX</button>
   </div>
   <div class="col-md-8">
     <table class="table table-hover">
@@ -42,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="text-xs-right">
           <td>{{totals?.totalMined | number : '1.2-2'}}</td>
           <td>{{totals?.allianceTax | number : '1.2-2'}}</td>
           <td>{{totals?.corpTax | number : '1.2-2'}}</td>
@@ -64,7 +73,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pilot of pilotResult">
+        <tr *ngFor="let pilot of pilotResult" class="text-xs-right">
           <td>{{pilot?.pilot}}</td>
           <td>{{pilot?.corporation}}</td>
           <td>{{pilot?.totalIskValue | number : '1.2-2'}}</td>
@@ -88,7 +97,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let corp of corpResult">
+        <tr *ngFor="let corp of corpResult" class="text-xs-right">
           <td>{{corp?.corporation}}</td>
           <td>{{corp?.totalIskValue | number : '1.2-2'}}</td>
           <td>{{corp?.allianceTax | number : '1.2-2'}}</td>

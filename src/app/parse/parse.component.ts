@@ -1,7 +1,7 @@
 import * as xlsx from 'xlsx';
 import { Component, OnInit } from '@angular/core';
 import { TaxCalculator, LedgerRow } from '../services/TaxCalculator';
-import { MarketHistory } from '../data/MarketHistory';
+import { MarketHistory } from '../models/MarketHistory';
 import { MarketService } from '../services/MarketService';
 import { FilterService } from '../services/FilterService';
 
@@ -12,7 +12,7 @@ import { FilterService } from '../services/FilterService';
 })
 export class ParseComponent implements OnInit {
 
-  constructor(private taxService: TaxCalculator, private filterService: FilterService) { }
+  constructor(private taxService: TaxCalculator, private filterService: FilterService, private marketService: MarketService) { }
 
   private header = 'timestamp	corporation	pilot	oreType	quantity	volume	price	typeId	systemId';
 
@@ -23,17 +23,34 @@ export class ParseComponent implements OnInit {
   public refineRate = '0.85';
   public corpTax = '0.05';
   public allianceTax = '0.25';
+  public selectedDate;
 
   public pilotResult;
   public corpResult;
   public totals;
 
+  public hasMarketData = false;
+
+  private marketResponse = [];
+
   ngOnInit() {
+    this.marketService.getPrices().then((result) => {
+      console.log(result);
+
+      this.marketResponse = result[0].reverse();
+
+      this.selectedDate = this.marketResponse[0].date;
+
+      this.hasMarketData = true;
+      console.log(this.marketResponse);
+    }, (error) => {
+      // show error;
+    });
   }
 
   parse() {
 
-    this.taxService.setRates(+this.refineRate, +this.allianceTax, +this.corpTax);
+    this.taxService.setRates(+this.refineRate, +this.allianceTax, +this.corpTax, this.selectedDate);
 
     console.log(this.fieldData);
 
