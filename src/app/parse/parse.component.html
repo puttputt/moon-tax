@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="textArea">Input</label>
+      <textarea ref-textarea [(ngModel)]="fieldData" class="form-control" id="input" rows="20"></textarea>
+
+      <div class="form-row">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Refine Rate</span>
+          </div>
+          <input [(ngModel)]="refineRate" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Alliance Tax</span>
+          </div>
+          <input [(ngModel)]="allianceTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Corp Tax</span>
+          </div>
+          <input [(ngModel)]="corpTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+      </div>
+    </div>
+    <button type="submit" (click)="parse()" class="btn btn-primary mb-2">TAX</button>
+  </div>
+  <div class="col-md-8">
+    <h2>Input Total</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Total Mined</th>
+          <th scope="col">Alliance Tax</th>
+          <th scope="col">Corp Tax</th>
+          <th scope="col">Total Tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{totals?.totalMined | number : '1.2-2'}}</td>
+          <td>{{totals?.allianceTax | number : '1.2-2'}}</td>
+          <td>{{totals?.corpTax | number : '1.2-2'}}</td>
+          <td>{{totals?.totalTax | number : '1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>By Pilot</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Pilot Name</th>
+          <th scope="col">Corporation</th>
+          <th scope="col">Total Mined</th>
+          <th scope="col">Alliance Tax</th>
+          <th scope="col">Corp Tax</th>
+          <th scope="col">Total Tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pilot of pilotResult">
+          <td>{{pilot?.pilot}}</td>
+          <td>{{pilot?.corporation}}</td>
+          <td>{{pilot?.totalIskValue | number : '1.2-2'}}</td>
+          <td>{{pilot?.allianceTax | number : '1.2-2'}}</td>
+          <td>{{pilot?.corporationTax | number : '1.2-2'}}</td>
+          <td>{{ pilot?.allianceTax + pilot?.corporationTax | number : '1.2-2'}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <h2>By Corporation</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Corporation</th>
+          <th scope="col">Total Mined</th>
+          <th scope="col">Alliance Tax</th>
+          <th scope="col">Corp Tax</th>
+          <th scope="col">Total Tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let corp of corpResult">
+          <td>{{corp?.corporation}}</td>
+          <td>{{corp?.totalIskValue | number : '1.2-2'}}</td>
+          <td>{{corp?.allianceTax | number : '1.2-2'}}</td>
+          <td>{{corp?.corporationTax | number : '1.2-2'}}</td>
+          <td>{{ corp?.allianceTax + corp?.corporationTax | number : '1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
