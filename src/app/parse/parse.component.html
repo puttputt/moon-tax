@@ -1,110 +1,151 @@
 <div class="row">
   <div class="col-md-4">
-    <div class="form-group">
-      <div class="form-row">
-        <textarea ref-textarea [(ngModel)]="fieldData" class="form-control" id="input" rows="10" placeholder="Copy Ledger To Clipboard and Paste here..."></textarea>
-      </div>
+    <div class="bs-component">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Mining Ledger</div>
+        <div class="card-body">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="input-group input-group-sm mb-3">
+                <textarea ref-textarea [(ngModel)]="fieldData" class="form-control" id="input" rows="10" placeholder="Copy Ledger To Clipboard and Paste here..."></textarea>
+              </div>
+            </div>
 
-      <div class="form-row">
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Refine Rate</span>
-          </div>
-          <input [(ngModel)]="refineRate" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
+            <div class="form-row">
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Refine Rate</span>
+                </div>
+                <input [(ngModel)]="refineRate" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+              </div>
 
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Alliance Tax</span>
-          </div>
-          <input [(ngModel)]="allianceTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Alliance Tax</span>
+                </div>
+                <input [(ngModel)]="allianceTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+              </div>
 
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Corp Tax</span>
-          </div>
-          <input [(ngModel)]="corpTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        </div>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Corp Tax</span>
+                </div>
+                <input [(ngModel)]="corpTax" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+              </div>
 
-        <div class="input-group input-group-sm mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Market Date</span>
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Market Date</span>
+                </div>
+                <select [(ngModel)]="selectedDate" class="form-control" id="exampleFormControlSelect1">
+                  <option *ngFor="let marketHistory of marketResponse" [value]="marketHistory?.date">{{marketHistory?.date}}
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
-          <select [(ngModel)]="selectedDate" class="form-control" id="exampleFormControlSelect1">
-            <option *ngFor="let marketHistory of marketResponse" [value]="marketHistory?.date">{{marketHistory?.date}}
-            </option>
-          </select>
+          <button type="submit" (click)="parse()" [disabled]="!hasMarketData" class="btn btn-success mb-2 pull-right">TAX</button>
         </div>
       </div>
     </div>
-    <button type="submit" (click)="parse()" [disabled]="!hasMarketData" class="btn btn-primary mb-2">TAX</button>
+
   </div>
   <div class="col-md-8">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Total Mined</th>
-          <th scope="col">Alliance Tax</th>
-          <th scope="col">Corp Tax</th>
-          <th scope="col">Total Tax</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="text-xs-right">
-          <td>{{totals?.totalMined | number : '1.2-2'}}</td>
-          <td>{{totals?.allianceTax | number : '1.2-2'}}</td>
-          <td>{{totals?.corpTax | number : '1.2-2'}}</td>
-          <td>{{totals?.totalTax | number : '1.2-2'}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div *ngIf="!result" class="jumbotron">
+      <h2>What is this?</h2>
+      <p>The Moon Tax tool is a way for corporation or alliance directors to easily determine who owes what for mining ledger
+        taxes.
+      </p>
 
-    <h3>By Pilot</h3>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Pilot Name</th>
-          <th scope="col">Corporation</th>
-          <th scope="col">Total Mined</th>
-          <th scope="col">Alliance Tax</th>
-          <th scope="col">Corp Tax</th>
-          <th scope="col">Total Tax</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pilot of pilotResult" class="text-xs-right">
-          <td>{{pilot?.pilot}}</td>
-          <td>{{pilot?.corporation}}</td>
-          <td>{{pilot?.totalIskValue | number : '1.2-2'}}</td>
-          <td>{{pilot?.allianceTax | number : '1.2-2'}}</td>
-          <td>{{pilot?.corporationTax | number : '1.2-2'}}</td>
-          <td>{{ pilot?.allianceTax + pilot?.corporationTax | number : '1.2-2'}}</td>
-        </tr>
+      <h2>How do I use it?</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <p>Step 1: Open up the Moon Ledger in game, select the appropriate moon, range and filters. Click "Copy to Clipboard"</p>
+        </li>
+        <li class="list-group-item">
+          <p>
+            Step 2:
+            <kbd>CTRL + V</kbd> into the empty box on the left.</p>
+        </li>
+        <li class="list-group-item">
+          <p>Step 3: Enter in the refine rate, alliance or corporation tax and hit "Tax"</p>
+        </li>
+      </ul>
 
-      </tbody>
-    </table>
 
-    <h3>By Corporation</h3>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Corporation</th>
-          <th scope="col">Total Mined</th>
-          <th scope="col">Alliance Tax</th>
-          <th scope="col">Corp Tax</th>
-          <th scope="col">Total Tax</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let corp of corpResult" class="text-xs-right">
-          <td>{{corp?.corporation}}</td>
-          <td>{{corp?.totalIskValue | number : '1.2-2'}}</td>
-          <td>{{corp?.allianceTax | number : '1.2-2'}}</td>
-          <td>{{corp?.corporationTax | number : '1.2-2'}}</td>
-          <td>{{ corp?.allianceTax + corp?.corporationTax | number : '1.2-2'}}</td>
-        </tr>
-      </tbody>
-    </table>
+    </div>
+
+    <div *ngIf="result" class="card text-white bg-secondary mb-3">
+      <div class="card-header">Result</div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Total Mined</th>
+              <th scope="col">Alliance Tax</th>
+              <th scope="col">Corp Tax</th>
+              <th scope="col">Total Tax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-dark">
+              <td>{{totals?.totalMined | number : '1.2-2'}}</td>
+              <td>{{totals?.allianceTax | number : '1.2-2'}}</td>
+              <td>{{totals?.corpTax | number : '1.2-2'}}</td>
+              <td>{{totals?.totalTax | number : '1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-body">
+        <h3>By Pilot</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="text-left">Pilot Name</th>
+              <th scope="col" class="text-right">Corporation</th>
+              <th scope="col" class="text-right">Total Mined</th>
+              <th scope="col" class="text-right">Alliance Tax</th>
+              <th scope="col" class="text-right">Corp Tax</th>
+              <th scope="col" class="text-right">Total Tax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pilot of pilotResult" class="table-dark text-right">
+              <td class="text-left">{{pilot?.pilot}}</td>
+              <td class="text-left">{{pilot?.corporation}}</td>
+              <td class="text-right">{{pilot?.totalIskValue | number : '1.2-2'}}</td>
+              <td class="text-right">{{pilot?.allianceTax | number : '1.2-2'}}</td>
+              <td class="text-right">{{pilot?.corporationTax | number : '1.2-2'}}</td>
+              <td class="text-right">{{ pilot?.allianceTax + pilot?.corporationTax | number : '1.2-2'}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <h3>By Corporation</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="text-left">Corporation</th>
+              <th scope="col" class="text-right">Total Mined</th>
+              <th scope="col" class="text-right">Alliance Tax</th>
+              <th scope="col" class="text-right">Corp Tax</th>
+              <th scope="col" class="text-right">Total Tax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let corp of corpResult" class="table-dark text-right">
+              <td class="text-left">{{corp?.corporation}}</td>
+              <td class="text-right">{{corp?.totalIskValue | number : '1.2-2'}}</td>
+              <td class="text-right">{{corp?.allianceTax | number : '1.2-2'}}</td>
+              <td class="text-right">{{corp?.corporationTax | number : '1.2-2'}}</td>
+              <td class="text-right">{{ corp?.allianceTax + corp?.corporationTax | number : '1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
