@@ -1,0 +1,53 @@
+Timestamp	Corporation	Pilot	Ore Type	Quantity	Volume	Est. Price	Ore TypeID	SolarSystemID
+2018.05.11	Malleus Caelum	Darkwave Malice	Bountiful Xenotime	245	2450	3957428	46312	30000713
+2018.05.26	Malleus Caelum	Darkwave Malice	Replete Zircon	220	2200	1401659	46306	30000713
+2018.05.11	Malleus Caelum	Darkwave Malice	Xenotime	1701	17010	27528677	45510	30000713
+2018.05.26	Malleus Caelum	Darkwave Malice	Xenotime	4827	48270	78119299	45510	30000713
+2018.05.10	Malleus Caelum	Darkwave Malice	Xenotime	629	6290	10179622	45510	30000713
+2018.05.26	Malleus Caelum	Darkwave Malice	Zircon	496	4960	1112865	45503	30000713
+2018.05.25	Malleus Caelum	jannie jannie	Replete Zircon	2879	28790	18342627	46306	30000713
+2018.05.25	Malleus Caelum	jannie jannie	Xenotime	25037	250370	405194301	45510	30000713
+2018.05.25	Malleus Caelum	Jason Varl	Bountiful Xenotime	17314	173140	279669059	46312	30000713
+2018.05.11	Malleus Caelum	Jason Varl	Bountiful Xenotime	5833	58330	94219107	46312	30000713
+2018.05.10	Malleus Caelum	Jason Varl	Bountiful Xenotime	9713	97130	156891855	46312	30000713
+2018.05.24	Malleus Caelum	Jason Varl	Bountiful Xenotime	9830	98300	158781729	46312	30000713
+2018.05.26	Malleus Caelum	Jason Varl	Replete Zircon	1500	15000	9556770	46306	30000713
+2018.05.25	Malleus Caelum	Jason Varl	Replete Zircon	787	7870	5014118	46306	30000713
+2018.05.24	Malleus Caelum	Jason Varl	Replete Zircon	816	8160	5198882	46306	30000713
+2018.05.10	Malleus Caelum	Jason Varl	Xenotime	10845	108450	175513527	45510	30000713
+2018.05.26	Malleus Caelum	Jason Varl	Xenotime	14422	144220	233403052	45510	30000713
+2018.05.25	Malleus Caelum	Jason Varl	Xenotime	14536	145360	235248007	45510	30000713
+2018.05.11	Malleus Caelum	Jason Varl	Xenotime	18190	181900	294383685	45510	30000713
+2018.05.26	Malleus Caelum	Jason Varl	Zircon	3500	35000	7852879	45503	30000713
+2018.05.25	Malleus Caelum	Maria Dimaloun	Bountiful Xenotime	13094	130940	211504370	46312	30000713
+2018.05.26	Malleus Caelum	Maria Dimaloun	Replete Zircon	41	410	261218	46306	30000713
+2018.05.25	Malleus Caelum	Maria Dimaloun	Replete Zircon	475	4750	3026310	46306	30000713
+2018.05.25	Malleus Caelum	Maria Dimaloun	Xenotime	18800	188000	304255816	45510	30000713
+2018.05.26	Malleus Caelum	Maria Dimaloun	Xenotime	4974	49740	80498320	45510	30000713
+2018.05.25	Malleus Caelum	Morbid Malice	Bountiful Xenotime	17814	178140	287745444	46312	30000713
+2018.05.11	Malleus Caelum	Morbid Malice	Bountiful Xenotime	5676	56760	91683122	46312	30000713
+2018.05.24	Malleus Caelum	Morbid Malice	Bountiful Xenotime	6546	65460	105736032	46312	30000713
+2018.05.10	Malleus Caelum	Morbid Malice	Bountiful Xenotime	8874	88740	143339680	46312	30000713
+2018.05.26	Malleus Caelum	Morbid Malice	Replete Zircon	1360	13600	8664804	46306	30000713
+2018.05.25	Malleus Caelum	Morbid Malice	Replete Zircon	778	7780	4956778	46306	30000713
+2018.05.24	Malleus Caelum	Morbid Malice	Replete Zircon	816	8160	5198882	46306	30000713
+2018.05.10	Malleus Caelum	Morbid Malice	Xenotime	10805	108050	174866175	45510	30000713
+2018.05.26	Malleus Caelum	Morbid Malice	Xenotime	13925	139250	225359693	45510	30000713
+2018.05.25	Malleus Caelum	Morbid Malice	Xenotime	13942	139420	225634818	45510	30000713
+2018.05.11	Malleus Caelum	Morbid Malice	Xenotime	20228	202280	327366310	45510	30000713
+2018.05.24	Malleus Caelum	Newcastle Brownale	Bountiful Xenotime	10600	106000	171219362	46312	30000713
+2018.05.10	Malleus Caelum	Newcastle Brownale	Bountiful Xenotime	13654	136540	220549921	46312	30000713
+2018.05.25	Malleus Caelum	Newcastle Brownale	Bountiful Xenotime	18943	189430	305981922	46312	30000713
+2018.05.11	Malleus Caelum	Newcastle Brownale	Bountiful Xenotime	6399	63990	103361575	46312	30000713
+2018.05.25	Malleus Caelum	Newcastle Brownale	Replete Zircon	530	5300	3376725	46306	30000713
+2018.05.24	Malleus Caelum	Newcastle Brownale	Replete Zircon	546	5460	3478664	46306	30000713
+2018.05.26	Malleus Caelum	Newcastle Brownale	Replete Zircon	910	9100	5797773	46306	30000713
+2018.05.25	Malleus Caelum	Newcastle Brownale	Xenotime	14187	141870	229599854	45510	30000713
+2018.05.26	Malleus Caelum	Newcastle Brownale	Xenotime	15644	156440	253179680	45510	30000713
+2018.05.11	Malleus Caelum	Newcastle Brownale	Xenotime	21391	213910	346188093	45510	30000713
+2018.05.10	Malleus Caelum	Newcastle Brownale	Xenotime	8520	85200	137886146	45510	30000713
+2018.05.25	Danish Transport and Logistic Shipyard	scooterDK Audene	Bountiful Xenotime	2075	20750	33516997	46312	30000713
+2018.05.25	Danish Transport and Logistic Shipyard	scooterDK Audene	Replete Zircon	2053	20530	13080032	46306	30000713
+2018.05.25	Danish Transport and Logistic Shipyard	scooterDK Audene	Xenotime	5181	51810	83848371	45510	30000713
+2018.05.25	Malleus Caelum	scooterDK1	Replete Zircon	2007	20070	12786958	46306	30000713
+2018.05.25	Malleus Caelum	scooterDK1	Xenotime	26153	261530	423255444	45510	30000713

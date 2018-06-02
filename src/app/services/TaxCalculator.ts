@@ -7,6 +7,8 @@ export interface LedgerRow {
     corporation: string;
     oreType: string;
     quantity: string;
+    typeId: string;
+    systemId: string;
     result: any;
 }
 
@@ -17,16 +19,26 @@ const highYield = 2;
 @Injectable()
 export class TaxCalculator {
 
-    public refineRate = 0.85;
-    public allianceTax = 0.25;
-    public corporationTax = 0.05;
+    public refineRate;
+    public allianceTax;
+    public corporationTax;
 
     constructor(private market: MarketService) { }
+
+    public setRates(refineRate: number, allianceTax: number, corporationTax: number) {
+        this.refineRate = refineRate;
+        this.allianceTax = allianceTax;
+        this.corporationTax = corporationTax;
+    }
 
     public calculateTax(row: LedgerRow) {
         //console.log(JSON.stringify(this.market.moonOrePrices));
 
-        const oreId = this.getOreId(row);
+        if (!this.refineRate || !this.allianceTax || !this.corporationTax) {
+            throw Error('Rates not set!');
+        }
+
+        const oreId = +row.typeId;
         const details = this.getOreDetails(oreId);
         //console.log(details);
         //console.log(row.quantity);
@@ -95,10 +107,6 @@ export class TaxCalculator {
             }
         }
         return materials;
-    }
-
-    private getOreId(row: LedgerRow) {
-        return +this.getKeyByValue(MoonOreNames, row.oreType);
     }
 
     private getOreDetails(oreId: number) {
